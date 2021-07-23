@@ -8,6 +8,9 @@ import pdal
 from osgeo import gdal
 import skimage.io
 
+# customized modules
+from lidar2feature import utils, knowledgebase
+
 # the name of the processing data
 las_name = 'C_37EZ1_7415_sample.las'
 
