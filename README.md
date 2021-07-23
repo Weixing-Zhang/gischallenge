@@ -151,7 +151,7 @@ You can download two large LiDAR data by following the instructions below. Two s
 ```
 ./download-data.sh
 ```
-* `Windows`: Click the following `C_37EZ1.LAZ` and `C_37EZ2.LAZ` to directly downloand them. [C_37EZ1.LAZ](https://download.pdok.nl/rws/ahn3/v1_0/laz/C_37EZ1.LAZ) and [C_37EZ2.LAZ](https://download.pdok.nl/rws/ahn3/v1_0/laz/C_37EZ2.LAZ).
+* `Windows`: Click the following [C_37EZ1.LAZ](https://download.pdok.nl/rws/ahn3/v1_0/laz/C_37EZ1.LAZ) and [C_37EZ2.LAZ](https://download.pdok.nl/rws/ahn3/v1_0/laz/C_37EZ2.LAZ) to directly downloand them.
 
 
 # Preprocess Large LiDAR Data (Optional)

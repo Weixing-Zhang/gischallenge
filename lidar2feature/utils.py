@@ -2,7 +2,7 @@ import laspy
 import pdal
 import numpy as np
 from osgeo import gdal
-from statistics import mode
+from scipy import stats
 from scipy.ndimage import generic_filter
 
 # lidar2feature.external module was developed by others
@@ -67,7 +67,24 @@ def save_tif(reference_path, input_array, tif_path):
     print(f"Saved the image at {tif_path}")
 
 
-def majority_filter(input_array, slide_size=3):
+def majority(input_array):
+    """
+    Description: 
+        Get the mode value of an array.
+    --------------------------------------
+    Arguments:
+        input_array: the sliding window array
+    Return:
+        mode.mode[0]: the mode value of the sliding window array
+    """
+
+    # acquire the mode value
+    mode = stats.mode(input_array)
+
+    return mode.mode[0]
+
+
+def majority_filter(input_array, size):
     """
     Description: 
         Replaces cells in a raster based on the majority of their contiguous neighboring cells.
@@ -80,8 +97,9 @@ def majority_filter(input_array, slide_size=3):
     """
 
     # execute the majority
-    filtered_array = generic_filter(input_array, lambda x: mode(x), size=slide_size)
-    print(f"Filterd the noise using a majority filter with a size of {slide_size} majority filter")
+    filtered_array = generic_filter(input_array, majority, size)
+
+    print(f"Filterd the noise using a majority filter with a size of {size} majority filter")
 
     return filtered_array
 
