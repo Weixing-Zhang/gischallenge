@@ -5,10 +5,6 @@ on: [push]
 jobs:
   run:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.8
@@ -25,7 +21,6 @@ jobs:
           conda activate gitaction
           conda install --file conda-requirements.txt -y --channel conda-forge
           pip install -r pip-requirements.txt
-
       - name: Run against the functions
         run: |
           python lidar2feature-test.py
