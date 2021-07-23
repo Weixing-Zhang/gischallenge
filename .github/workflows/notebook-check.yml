@@ -11,14 +11,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
+          python-version: 3.8
       - name: Add conda to system path
         run: |
+          # $CONDA is an environment variable pointing to the root of the miniconda directory
           echo $CONDA/bin >> $GITHUB_PATH
+      - name: Install dependencies
+        run: |
           conda create -n gitaction -y --channel conda-forge
           conda activate gitaction
           conda install --file conda-requirements.txt -y --channel conda-forge
