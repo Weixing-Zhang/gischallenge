@@ -19,6 +19,3 @@ jobs:
         run: |
           conda install --file conda-requirements.txt -y --channel conda-forge
           pip install -r pip-requirements.txt
-      - name: Run against the functions
-        run: |
-          python unittest.py
