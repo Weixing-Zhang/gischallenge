@@ -17,8 +17,6 @@ jobs:
           echo $CONDA/bin >> $GITHUB_PATH
       - name: Install dependencies
         run: |
-          conda create -n gitaction -y --channel conda-forge
-          conda activate gitaction
           conda install --file conda-requirements.txt -y --channel conda-forge
           pip install -r pip-requirements.txt
       - name: Run against the functions
