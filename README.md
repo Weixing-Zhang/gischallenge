@@ -89,6 +89,7 @@ The easiest way to explore this repository is to run the following two notebooks
 ## File Structure
 ```
 gischallenge/
+ ├──.github/check-setup-env.yml                    # check the dependence requirement works
  ├──data/                                          # store the to-process data
  |  ├──knowledgebase/C_37EZ1_7415_sample.las       # sample data for the demo of kownledge-based solution
  |  └──mlbase/C_37EZ2_7415_sample.las              # sample data for the demo of ML-based solution 
