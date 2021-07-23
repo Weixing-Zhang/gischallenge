@@ -5,23 +5,25 @@ on: [push]
 jobs:
   run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+
     steps:
-      - uses: actions/checkout@v1
-      - name: Set up Python
-        uses: actions/setup-python@v1
-      - uses: yaananth/run-notebook@v1
-        env:
-          RUNNER: ${{ toJson(runner) }}
-          SECRETS: ${{ toJson(secrets) }}
-          GITHUB: ${{ toJson(github) }}
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
         with:
-          notebook: "knowledgebased-lidar2feature.ipynb"
-          isReport: False
-          poll: True
-      - uses: actions/upload-artifact@master
-        if: always()
-        with:
-          name: output
-          path: ${{ RUNNER.temp }}/nb-runner
-        env:
-          RUNNER: ${{ toJson(runner) }}
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+      - name: Add conda to system path
+        run: |
+          echo $CONDA/bin >> $GITHUB_PATH
+          conda create -n gitaction -y --channel conda-forge
+          conda activate gitaction
+          conda install --file conda-requirements.txt -y --channel conda-forge
+          pip install -r pip-requirements.txt
+
+      - name: Run against the functions
+        run: |
+          python lidar2feature-test.py
